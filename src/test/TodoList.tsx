@@ -5,13 +5,28 @@ const TodoList = () => {
   const [text, setText] = useState<string>('');
   const [list, setList] = useState<string[]>([]);
 
-  const handleText = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   };
   const handleClick = (value: string) => {
     setList([...list, value]); // list에 value 추가
+    if (text !== '') {
+      list.push(text);
+      setList(list);
+      setText('');
+    }
     console.log(list);
   };
+
+  // const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  //   if (e.key === 'Enter') {
+  //     handleSubmitBtn();
+  //   }
+  // };
+  //
+  // const handleSubmitBtn = () => {
+  //   setList([...list, value]);
+  // };
 
   return (
     <>
@@ -20,9 +35,15 @@ const TodoList = () => {
       {list.map((list, index) => (
         <Lists key={index}>{list}</Lists>
       ))}
-      {/*인풋날리기*/}
-      <input placeholder="할 일을 입력해주세요." onChange={handleText} />
+      <input
+        type="text"
+        value={text}
+        placeholder="할 일을 입력해주세요."
+        onChange={handleInput}
+      />
       <button
+        type="submit"
+        value={text}
         onClick={() => {
           handleClick(text);
         }}
