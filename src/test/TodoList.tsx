@@ -18,15 +18,11 @@ const TodoList = () => {
     console.log(list);
   };
 
-  // const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-  //   if (e.key === 'Enter') {
-  //     handleSubmitBtn();
-  //   }
-  // };
-  //
-  // const handleSubmitBtn = () => {
-  //   setList([...list, value]);
-  // };
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleClick(text);
+    }
+  };
 
   return (
     <>
@@ -40,6 +36,7 @@ const TodoList = () => {
         value={text}
         placeholder="할 일을 입력해주세요."
         onChange={handleInput}
+        onKeyDown={handleKeyPress}
       />
       <button
         type="submit"
